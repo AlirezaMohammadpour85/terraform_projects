@@ -23,8 +23,8 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "OT367_ec2_instance" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.OT367_ec2_instance_type
-  subnet_id                   = var.OT367_private_subnet_cidrs # Use the private subnet for the instance
-  security_groups             = [var.OT367_sg_allow_ssm["name"]]
+  subnet_id                   = var.OT367_private_subnet_id # Use the private subnet for the instance
+  security_groups             = [var.OT367_sg_allow_ssm["id"]]
   iam_instance_profile        = var.OT367_ssm_instance_profile["name"]
   associate_public_ip_address = false # true
 

@@ -3,7 +3,7 @@ resource "aws_subnet" "OT367_public_subnet_1" {
   cidr_block = var.OT367_public_subnet_cidrs
 
   tags = merge(var.common_tags, {
-    Name = "public_subnet_1"
+    Name = "OT-367-public_subnet_1"
     }
   )
 }
@@ -13,6 +13,6 @@ resource "aws_subnet" "OT367_private_subnet" {
   cidr_block        = var.OT367_private_subnet_cidrs
   availability_zone = "eu-west-2a" # Hardcoded AZ
   tags = merge(var.common_tags, {
-    Name = "private_subnet"
+    Name = "OT-367-private_subnet"
   })
 }

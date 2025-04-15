@@ -5,7 +5,7 @@ module "ec2" {
   OT367_ssm_instance_profile = module.securitygroup.OT367_ssm_instance_profile
   OT367_public_subnet_1      = module.network.OT367_public_subnet_1
   OT367_sg_allow_ssm         = module.securitygroup.OT367_sg_allow_ssm
-  OT367_private_subnet_cidrs = var.OT367_private_subnet_cidrs
+  OT367_private_subnet_id    = module.network.OT367_private_subnet_id
 }
 
 module "ebs" {

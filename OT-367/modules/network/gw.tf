@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "OT367_igw" {
 resource "aws_eip" "nat_gateway_eip" {
   domain = "vpc"
   tags = merge(var.common_tags, {
-    Name = "nat_gateway_eip"
+    Name = "OT-367-nat_gateway_eip"
   })
 }
 
