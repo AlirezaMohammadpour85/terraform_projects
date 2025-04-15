@@ -8,13 +8,13 @@ module "ec2" {
   OT367_private_subnet_id    = module.network.OT367_private_subnet_id
 }
 
-module "ebs" {
-  source                  = "./modules/ebs"
-  common_tags             = var.common_tags
-  ebs_volume_size         = var.ebs_volume_size
-  OT367_ec2_instance_info = module.ec2.OT367_ec2_instance_info
+# module "ebs" {
+#   source                  = "./modules/ebs"
+#   common_tags             = var.common_tags
+#   ebs_volume_size         = var.ebs_volume_size
+#   OT367_ec2_instance_info = module.ec2.OT367_ec2_instance_info
 
-}
+# }
 
 module "network" {
   source                     = "./modules/network"
