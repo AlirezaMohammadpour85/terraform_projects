@@ -4,11 +4,12 @@ resource "aws_internet_gateway" "OT367_igw" {
   tags = merge(var.common_tags, {
     Name = "OT-367-igw"
   })
-  
+
 }
 
 resource "aws_eip" "nat_gateway_eip" {
-  domain = "vpc"
+  # instance = var.OT367_ec2_instance_info.id # Use the EC2 instance ID for the EIP association
+  domain   = "vpc"
   tags = merge(var.common_tags, {
     Name = "OT-367-nat_gateway_eip"
   })
@@ -22,3 +23,4 @@ resource "aws_nat_gateway" "OT367_nat_gateway" {
   })
   depends_on = [aws_internet_gateway.OT367_igw]
 }
+

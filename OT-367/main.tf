@@ -22,6 +22,7 @@ module "network" {
   OT367_public_subnet_cidrs  = var.OT367_public_subnet_cidrs
   OT367_private_subnet_cidrs = var.OT367_private_subnet_cidrs
   OT367_vpc_cidr_block       = var.OT367_vpc_cidr_block
+  OT367_ec2_instance_info    = module.ec2.OT367_ec2_instance_info
 }
 
 module "securitygroup" {

@@ -19,11 +19,20 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
+resource "aws_eip" "OT367_public_ip_ec2" {
+  instance = aws_instance.OT367_ec2_instance.id # Use the EC2 instance ID for the EIP association
+  domain   = "vpc"
+  tags = merge(var.common_tags, {
+    Name = "OT-367-public-ip-ec2"
+  })
+
+}
+
 resource "aws_instance" "OT367_ec2_instance" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.OT367_ec2_instance_type
-  subnet_id                   = var.OT367_private_subnet_id
-  security_groups             = [var.OT367_sg_allow_ssm["id"]]
+  subnet_id                   = var.OT367_public_subnet_1
+  vpc_security_group_ids      = [var.OT367_sg_allow_ssm["id"]]
   iam_instance_profile        = var.OT367_ssm_instance_profile["name"]
   associate_public_ip_address = false
 
@@ -64,6 +73,9 @@ resource "aws_instance" "OT367_ec2_instance" {
             sudo reboot
             EOF
 
+  lifecycle {
+    ignore_changes = [tags, associate_public_ip_address]
+  }
   tags = merge(var.common_tags, {
     Name = "OT-367-ec2-instance"
   })

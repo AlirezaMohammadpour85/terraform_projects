@@ -19,3 +19,13 @@ variable "OT367_vpc_cidr_block" {
   type        = string
 
 }
+variable "OT367_ec2_instance_info" {
+  description = "OT-367 ec2 instance availability zone"
+  type        = object({
+    id                = string
+    public_ip         = string
+    availability_zone = string
+  })
+}
+
+
