@@ -13,3 +13,12 @@ output "OT367_sg_allow_ssm" {
   }
   description = "Security group for allowing SSM access"
 }
+
+output "OT367_elb_sg" {
+  value = {
+    id   = aws_security_group.OT367_elb_sg.id
+    name = aws_security_group.OT367_elb_sg.name
+  }
+  description = "Security group for the ELB"
+  
+}

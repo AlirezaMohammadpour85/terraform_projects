@@ -5,8 +5,8 @@ aws_region = "eu-west-2"
 OT367_vpc_cidr_block = "10.250.0.0/16"
 
 # Subnet CIDR Blocks
-OT367_public_subnet_cidrs  = "10.250.1.0/24"
-OT367_private_subnet_cidrs = "10.250.10.0/24"
+OT367_public_subnet_cidrs  = ["10.250.1.0/24", "10.250.2.0/24"]
+OT367_private_subnet_cidrs = ["10.250.10.0/24"]
 
 # AWS Profile name 
 aws_profile = "Domotz"
@@ -31,6 +31,10 @@ OT367_ec2_instance_type = "t3.xlarge"
 # ebs volume configuration
 # Size in GB
 ebs_volume_size = 20
+
+# acm_certificate_arn 
+acm_certificate_arn= "arn:aws:acm:eu-west-2:805719057625:certificate/bca9094c-c295-41d7-a603-0a2ec06568f4"
+
 
 # VPC and Networking
 # vpc_name = "wazuh-test"

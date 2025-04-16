@@ -18,7 +18,7 @@ variable "OT367_ssm_instance_profile" {
   })
 }
 
-variable "OT367_public_subnet_1" {
+variable "OT367_public_subnet_1_id" {
   description = "OT-367 public subnet 1"
   type        = string
 }
@@ -26,6 +26,14 @@ variable "OT367_private_subnet_id" {
   description = "OT-367 private subnet cidr"
 }
 variable "OT367_sg_allow_ssm" {
+  description = "OT-367 security group for allowing SSM access"
+  type = object({
+    id   = string
+    name = string
+  })
+
+}
+variable "OT367_elb_sg" {
   description = "OT-367 security group for allowing SSM access"
   type = object({
     id   = string

@@ -4,7 +4,6 @@ resource "aws_internet_gateway" "OT367_igw" {
   tags = merge(var.common_tags, {
     Name = "OT-367-igw"
   })
-
 }
 
 resource "aws_eip" "nat_gateway_eip" {
