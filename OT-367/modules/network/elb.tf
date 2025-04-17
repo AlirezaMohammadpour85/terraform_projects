@@ -5,7 +5,7 @@ resource "aws_lb" "OT367_alb" {
   load_balancer_type = "application"
   security_groups    = [var.OT367_elb_sg.id]
   subnets            = [aws_subnet.OT367_public_subnet_1.id, aws_subnet.OT367_public_subnet_2.id] # Add more if needed (e.g. AZ redundancy)
-
+  enable_cross_zone_load_balancing = true
   tags = merge(var.common_tags, {
     Name = "OT367-ALB-airbyte_service_domotz_app"
   })
