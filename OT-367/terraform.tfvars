@@ -25,8 +25,9 @@ common_tags = {
 project_name = "OT-367"
 
 # ec2 instance configuration
-OT367_ec2_instance_type = "t3.xlarge"
-
+# "t3.xlarge" causes issues with the application
+OT367_ec2_instance_type = "t3.2xlarge"
+ami_id     = "ami-0757346e231d7ed5a"
 
 # ebs volume configuration
 # Size in GB

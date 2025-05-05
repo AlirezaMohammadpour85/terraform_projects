@@ -5,6 +5,11 @@ variable "common_tags" {
 
 }
 
+variable "ami_id" {
+  description = "AMI ID to launch the EC2 instance from (e.g. custom AMI you created)"
+  type        = string
+}
+
 variable "OT367_ec2_instance_type" {
   description = "OT-367 ec2 instance type"
   type        = string

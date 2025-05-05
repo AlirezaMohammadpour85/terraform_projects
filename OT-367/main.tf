@@ -7,6 +7,7 @@ module "ec2" {
   OT367_sg_allow_ssm         = module.securitygroup.OT367_sg_allow_ssm
   OT367_elb_sg               = module.securitygroup.OT367_elb_sg
   OT367_private_subnet_id    = module.network.OT367_private_subnet_id
+  ami_id                     = var.ami_id
 }
 
 # module "ebs" {

@@ -1,23 +1,24 @@
-data "aws_ami" "ubuntu" {
-  most_recent = true
+# use ubuntu ami
+# data "aws_ami" "ubuntu" {
+#   most_recent = true
 
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-  }
+#   filter {
+#     name   = "name"
+#     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+#   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-  filter {
-    name = "architecture"
-    # or "arm64"
-    values = ["x86_64"]
-  }
-  # Canonical's official AWS account ID
-  owners = ["099720109477"]
-}
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+#   filter {
+#     name = "architecture"
+#     # or "arm64"
+#     values = ["x86_64"]
+#   }
+#   # Canonical's official AWS account ID
+#   owners = ["099720109477"]
+# }
 
 # use EIP
 # resource "aws_eip" "OT367_public_ip_ec2" {
@@ -30,7 +31,8 @@ data "aws_ami" "ubuntu" {
 
 
 resource "aws_instance" "OT367_ec2_instance" {
-  ami                         = data.aws_ami.ubuntu.id
+  # ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.ami_id
   instance_type               = var.OT367_ec2_instance_type
   # subnet_id                   = var.OT367_public_subnet_1_id
   subnet_id                   = var.OT367_private_subnet_id # Use the private subnet

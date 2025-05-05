@@ -53,12 +53,14 @@ variable "ebs_volume_size" {
 variable "OT367_ec2_instance_type" {
   description = "OT-367 ec2 instance type"
 }
-
+variable "ami_id" {
+  description = "AMI ID to launch the Michele OT-367 EC2 instance from (custom AMI I created)"
+  type        = string
+}
 variable "acm_certificate_arn" {
   description = "The ARN of the existing ACM certificate"
   type        = string
 }
 
 # security group - start
-
 
