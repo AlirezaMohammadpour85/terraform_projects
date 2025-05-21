@@ -1,10 +1,10 @@
 # This module creates an Application Load Balancer (ALB) in AWS.
 resource "aws_lb" "OT367_alb" {
-  name               = "OT367-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [var.OT367_elb_sg.id]
-  subnets            = [aws_subnet.OT367_public_subnet_1.id, aws_subnet.OT367_public_subnet_2.id] # Add more if needed (e.g. AZ redundancy)
+  name                             = "OT367-alb"
+  internal                         = false
+  load_balancer_type               = "application"
+  security_groups                  = [var.OT367_elb_sg.id]
+  subnets                          = [aws_subnet.OT367_public_subnet_1.id, aws_subnet.OT367_public_subnet_2.id] # Add more if needed (e.g. AZ redundancy)
   enable_cross_zone_load_balancing = true
   tags = merge(var.common_tags, {
     Name = "OT367-ALB-airbyte_service_domotz_app"
@@ -42,7 +42,7 @@ resource "aws_lb_target_group_attachment" "OT367_tg_attachment" {
 
 
 resource "aws_route53_record" "alb_alias_record" {
-  zone_id = "Z3UJBO2M5QHFLY"
+  zone_id = var.OT367_alb_zone_id
   name    = "airbyte.service.domotz.app"
   type    = "A"
 

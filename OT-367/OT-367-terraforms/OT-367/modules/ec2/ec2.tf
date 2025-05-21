@@ -52,17 +52,12 @@ resource "aws_instance" "OT367_ec2_instance" {
 
   user_data = <<-EOF
 #!/bin/bash
+# Update and install prerequisites
 apt-get update -y
-apt-get install -y snapd
+apt-get install -y snapd git ca-certificates curl gnupg lsb-release
 snap install amazon-ssm-agent --classic
 systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-apt-get install -y git
-apt-get install -y \
-  ca-certificates \
-  curl \
-  gnupg \
-  lsb-release
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
@@ -74,7 +69,6 @@ systemctl enable docker
 systemctl start docker
 usermod -aG docker ubuntu
 sudo usermod -aG docker ssm-user
-sudo reboot
 EOF
 
   lifecycle {

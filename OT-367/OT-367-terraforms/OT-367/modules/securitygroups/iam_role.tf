@@ -1,5 +1,8 @@
 resource "aws_iam_role" "OT367_ssm_role" {
   name               = "OT-367-ssm-role"
+  tags = merge(var.common_tags, {
+    Name = "OT-367-ssm-role"
+  })
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

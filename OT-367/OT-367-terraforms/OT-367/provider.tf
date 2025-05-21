@@ -1,11 +1,11 @@
 terraform {
   backend "s3" {
-    bucket  = "amohammadpour-terraform-tfstate"
+    bucket  = "security-compliance-tfstate"
     key     = "OT-367/terraform/terraform.tfstate"
     region  = "eu-west-2"
     profile = "Domotz"
     encrypt = true
-    # dynamodb_table = "amohammadpour-tfstate-lock"  # optional
+    dynamodb_table = "operations-tfstate-lock" 
   }
 
   required_providers {
@@ -21,3 +21,4 @@ provider "aws" {
   profile                  = var.aws_profile
   shared_credentials_files = [var.shared_credentials_files]
 }
+

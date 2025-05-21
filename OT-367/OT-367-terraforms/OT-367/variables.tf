@@ -40,11 +40,27 @@ variable "OT367_private_subnet_cidrs" {
 variable "OT367_vpc_cidr_block" {
   description = "OT-367 vpc cidr block"
 }
+variable "OT367_private_subnet_availability_zone" {
+  description = "OT-367 private subnet availability zone"
+  type        = string
+}
+
 # vpc & network  - end
 
 # ebs - start
 variable "ebs_volume_size" {
-  description = "EBS volume size"
+  description = "EBS volume size in GB"
+  type        = number
+  
+  validation {
+    condition     = floor(var.ebs_volume_size) == var.ebs_volume_size
+    error_message = "The ebs_volume_size must be an integer (whole number)."
+  }
+  
+  validation {
+    condition     = var.ebs_volume_size >= 1
+    error_message = "EBS GP3 volumes must be at least 1 GB in size."
+  }
 }
 # ebs - end
 
@@ -54,7 +70,7 @@ variable "OT367_ec2_instance_type" {
   description = "OT-367 ec2 instance type"
 }
 variable "ami_id" {
-  description = "AMI ID to launch the Michele OT-367 EC2 instance from (custom AMI I created)"
+  description = "AMI ID created from the EC2 instance snapshot (2025/05/02) including all required dependencies installed"
   type        = string
 }
 variable "acm_certificate_arn" {
@@ -62,5 +78,25 @@ variable "acm_certificate_arn" {
   type        = string
 }
 
-# security group - start
+# ec2 instance - end
 
+#elb - start
+variable "OT367_alb_zone_id" {
+  description = "OT-367 alb Zone id"
+  type        = string
+}
+#elb - end
+
+# Variables for existing peer connections -start
+variable "existing_peering_connection_ids" {
+  description = "IDs of existing VPC peering connections"
+  type        = list(string)
+  default     = []
+}
+
+variable "peer_vpc_cidr_blocks" {
+  description = "CIDR blocks of the peer VPCs"
+  type        = list(string)
+  default     = []
+}
+# Variables for existing peer connections -start

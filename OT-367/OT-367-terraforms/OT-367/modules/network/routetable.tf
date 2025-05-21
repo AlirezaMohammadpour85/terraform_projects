@@ -15,7 +15,7 @@ resource "aws_route_table" "OT367_public_2_rt" {
     gateway_id = aws_internet_gateway.OT367_igw.id
   }
   tags = merge(var.common_tags, {
-    Name = "OT-367-public-1-rt"
+    Name = "OT-367-public-2-rt"
   })
 }
 

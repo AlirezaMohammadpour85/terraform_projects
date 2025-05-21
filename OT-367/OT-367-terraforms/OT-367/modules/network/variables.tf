@@ -10,6 +10,12 @@ variable "OT367_public_subnet_cidrs" {
   type        = list(string)
 
 }
+
+variable "OT367_private_subnet_availability_zone" {
+  description = "OT-367 private subnet availability zone"
+  type        = string
+}
+
 variable "OT367_private_subnet_cidrs" {
   description = "OT-367 private subnet cidr"
   type        = list(string)
@@ -41,4 +47,21 @@ variable "acm_certificate_arn" {
   type        = string
 }
 
+variable "OT367_alb_zone_id" {
+  description = "OT-367 alb Zone id"
+  type        = string
+}
 
+
+# Variables for existing peer connections
+variable "existing_peering_connection_ids" {
+  description = "IDs of existing VPC peering connections"
+  type        = list(string)
+  default     = []
+}
+
+variable "peer_vpc_cidr_blocks" {
+  description = "CIDR blocks of the peer VPCs"
+  type        = list(string)
+  default     = []
+}
