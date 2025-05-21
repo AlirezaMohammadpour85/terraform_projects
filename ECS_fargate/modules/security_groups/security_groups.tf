@@ -1,4 +1,9 @@
-resource "aws_security_group" "go_api_sg" {
+########################################################################################################################
+## SG for ECS Container Instances
+########################################################################################################################
+resource "aws_security_group" "ecs_container_instance" {
+  name = "${var.environment}_ECS_Container_Instance_SG"
+  description = "Security group for ECS task running on Fargate"
   # taken from output file in network module
   vpc_id = var.vpc_id
 

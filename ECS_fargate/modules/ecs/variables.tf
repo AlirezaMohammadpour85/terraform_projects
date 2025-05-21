@@ -1,3 +1,8 @@
+variable "aws_region" {
+  description = "AWS region where resources will be created"
+  type        = string
+}
+
 variable "ecs_cluster_name" {
   description = "Name of the ECS cluster"
   default     = "zuru-ecs-cluster"
@@ -9,6 +14,10 @@ variable "common_tags" {
   default     = {}
 }
 
+variable "environment" {
+  description = "Environment for deployment (like test,dev or staging)"
+  type        = string
+}
 
 variable "app_image_name" {
   description = "app image name"
@@ -18,8 +27,23 @@ variable "app_container_name" {
   description = "app container name"
 }
 
-variable "app_port" {
+variable "container_port" {
   description = "app port"
+}
+
+variable "ecs_service_name" {
+  description = "The name of the ECS service."
+  type        = string
+}
+
+variable "task_cpu_units" {
+  description = "The number of CPU units for the ECS task."
+  type        = number
+}
+
+variable "task_memory_units" {
+  description = "The number of memory units for the ECS task."
+  type        = number
 }
 
 variable "ecr_repository_url" {
@@ -29,13 +53,13 @@ variable "ecr_repository_url" {
 variable "public_subnet_1_id" {
   description = "ID of the first public subnet"
   type        = string
-  
+
 }
 
 variable "public_subnet_2_id" {
   description = "ID of the second public subnet"
   type        = string
-  
+
 }
 
 variable "aws_sg_go_api_sg_id" {
@@ -47,3 +71,21 @@ variable "ecs_task_execution_role_arn" {
   description = "ARN of the ECS task execution role"
   type        = string
 }
+
+variable "ecs_task_desired_count" {
+  description = "The number of tasks to run in the ECS service"
+  type        = number
+}
+
+variable "ecs_task_deployment_minimum_healthy_percent" {
+  description = "The minimum healthy percent of tasks to run in the ECS service"
+  type        = number
+}
+
+variable "ecs_task_deployment_maximum_percent" {
+  description = "The maximum percent of tasks to run in the ECS service"
+  type        = number
+}
+
+
+  

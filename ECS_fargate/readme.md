@@ -1,3 +1,4 @@
+# https://github.com/nexgeneerz/aws-scenario-ecs-fargate/tree/main -reference helped
 # Steps to create ECR and ECS-Fargate using terraform
 1- create ignore file
 2- create provider.tf file 

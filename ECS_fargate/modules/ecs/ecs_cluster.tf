@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "domotz_cluster" {
-  name = var.ecs_cluster_name
+  name = "${var.environment}_ECSCluster_${var.ecs_cluster_name}"
 
   setting {
     name  = "containerInsights"
@@ -7,6 +7,6 @@ resource "aws_ecs_cluster" "domotz_cluster" {
   }
 
   tags = merge(var.common_tags, {
-    Name = "TestECS-" + var.ecs_cluster_name
+    Name = "${var.environment}_ECSCluster_${var.ecs_cluster_name}"
   })
 }

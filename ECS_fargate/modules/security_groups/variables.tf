@@ -3,3 +3,12 @@ variable "vpc_id" {
   type        = string
   
 }
+variable "environment" {
+  description = "Environment for deployment (like test,dev or staging)"
+  type        = string
+}
+
+variable "common_tags" {
+  description = "Common tags for all resources"
+  type        = map(string)
+}
