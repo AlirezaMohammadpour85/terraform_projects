@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
     }
   }
 }
@@ -10,5 +10,5 @@ terraform {
 provider "aws" {
   region                   = var.aws_region
   shared_credentials_files = [var.shared_credentials_files]
-  profile                  = var.profile_name
+  profile                  = var.aws_profile
 }

@@ -1,19 +1,13 @@
-# AWS Region
-aws_region = "eu-west-2"
+########################################################################################################################
+## aws credentials profile info
+########################################################################################################################
+aws_region = "eu-north-1"
+# aws_profile = "Domotz"
+aws_profile = "terraform_user"
 
-# VPC Configuration
-OT367_vpc_cidr_block = "10.250.0.0/16"
-
-# Subnet CIDR Blocks
-OT367_public_subnet_cidrs  = ["10.250.1.0/24", "10.250.2.0/24"]
-OT367_private_subnet_cidrs = ["10.250.10.0/24"]
-
-# Private Subnet Availability Zone
-OT367_private_subnet_availability_zone = "eu-west-2a"
-
-# AWS Profile name 
-aws_profile = "Domotz"
-
+########################################################################################################################
+## Common Tags 
+########################################################################################################################
 # Common tags for all resources in the module
 common_tags = {
   test       = "true"
@@ -23,35 +17,77 @@ common_tags = {
   terraform  = "true"
 }
 
+########################################################################################################################
+## project variables
+########################################################################################################################
 project_name = "n8n"
+environment  = "test"
 
-
-# ebs volume configuration
+########################################################################################################################
+## ebs volume configuration
+########################################################################################################################
 # Size in GB
 ebs_volume_size = 20
 
 # acm_certificate_arn 
-acm_certificate_arn= "arn:aws:acm:eu-west-2:805719057625:certificate/bca9094c-c295-41d7-a603-0a2ec06568f4"
+# acm_certificate_arn= "arn:aws:acm:eu-west-2:805719057625:certificate/bca9094c-c295-41d7-a603-0a2ec06568f4"
 
-# elb zone id
+########################################################################################################################
+## elb
+########################################################################################################################
 OT367_alb_zone_id = "Z3UJBO2M5QHFLY"
 
-# elb zone id
+
+########################################################################################################################
+#  network resources
+########################################################################################################################
+vpc_cidr_block = "10.250.20.0/16"
+
+# Subnet CIDR Blocks
+public_subnet_ids  = ["10.250.21.0/24", "10.250.22.0/24"]
+private_subnet_ids = ["10.250.25.0/24"]
 
 
-# Variables for existing peer connections -start
-existing_peering_connection_ids = ["pcx-0f1cd18cc279208c4", "pcx-0705c8c85d8a1d522", "pcx-0d56e642a01c91195"]
-peer_vpc_cidr_blocks = ["172.26.0.0/16", "172.21.0.0/16", "172.22.0.0/21"]
+# Private Subnet Availability Zone
+# OT367_private_subnet_availability_zone = "eu-west-2a"
+# OT367_private_subnet_availability_zone = "eu-west-2a"
 
-# Variables for existing peer connections -end
 
-# ecr - start
+
+########################################################################################################################
+# ecr
+########################################################################################################################
 ecr_repo_name = "domotz-n8n"
-# ecr - end
 
-# ecs - start
-ecs_cluster_name = "domotz-n8n"
-# ecs - end
+########################################################################################################################
+# ecs
+########################################################################################################################
+ecs_cluster_name                            = "domotz-n8n"
+ecs_service_name                            = "domotz-n8n"
+ecs_task_desired_count                      = 1
+ecs_task_min_count                          = 1
+ecs_task_max_count                          = 1
+ecs_task_deployment_minimum_healthy_percent = 100
+ecs_task_deployment_maximum_percent         = 200
+cpu_target_tracking_desired_value           = 50
+memory_target_tracking_desired_value        = 50
+target_capacity                             = 100
+container_port                              = 80
+task_cpu_units                              = 256
+task_memory_units                           = 512
+app_image_name                              = "domotz-n8n"
+app_container_name                          = "domotz-n8n"
+
+
+########################################################################################################################
+# efs
+########################################################################################################################
+efs_name = "domotz-n8n"
+
+
+
+
+
 
 
 

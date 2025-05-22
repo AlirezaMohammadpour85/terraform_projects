@@ -1,5 +1,4 @@
 # use one ecr, different tags for different images
-########################################################################################################################
 ## Container registry for the service's Docker image
 ########################################################################################################################
 resource "aws_ecr_repository" "domotz_repo" {
@@ -11,7 +10,7 @@ resource "aws_ecr_repository" "domotz_repo" {
   }
 
   tags = merge(var.common_tags, {
-    Name = "TestECR-" + var.ecr_repo_name
+    Name = "${var.environment}-${var.project_name}-${var.ecr_repo_name}"
   })
 
 }

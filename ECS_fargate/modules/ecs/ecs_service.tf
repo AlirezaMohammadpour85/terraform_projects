@@ -15,7 +15,7 @@ resource "aws_ecs_service" "app_service" {
   }
   network_configuration {
     # taken from network ecs output file
-    subnets          = [var.public_subnet_1_id, var.public_subnet_2_id]
+    subnets          = var.public_subnet_ids
     security_groups  = [var.aws_sg_go_api_sg_id]
     assign_public_ip = false #true
   }

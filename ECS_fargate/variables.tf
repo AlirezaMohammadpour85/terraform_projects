@@ -1,5 +1,5 @@
 ########################################################################################################################
-# aws credentials profile info -start
+## aws credentials profile info
 ########################################################################################################################
 variable "aws_region" {
   description = "Value of the Name tag for the EC2 instance"
@@ -13,7 +13,7 @@ variable "aws_profile" {
 }
 
 ########################################################################################################################
-# Common Tags - start
+## Common Tags 
 ########################################################################################################################
 variable "common_tags" {
   description = "Common tags for all resources"
@@ -22,7 +22,7 @@ variable "common_tags" {
 }
 
 ########################################################################################################################
-# project variables - start
+## project variables 
 ########################################################################################################################
 variable "project_name" {
   description = "Project name"
@@ -36,7 +36,7 @@ variable "environment" {
 }
 
 ########################################################################################################################
-# ebs - start
+## ebs 
 ########################################################################################################################
 variable "ebs_volume_size" {
   description = "EBS volume size in GB"
@@ -52,16 +52,32 @@ variable "ebs_volume_size" {
     error_message = "EBS GP3 volumes must be at least 1 GB in size."
   }
 }
-# ebs - end
 
 ########################################################################################################################
-#elb - start
+## elb 
 ########################################################################################################################
 variable "OT367_alb_zone_id" {
   description = "OT-367 alb Zone id"
   type        = string
 }
-#elb - end
+
+########################################################################################################################
+#  network resources
+########################################################################################################################
+variable "vpc_cidr_block" {
+  description = "ID of the existing VPC"
+  type        = string
+}
+
+variable "public_subnet_ids" {
+  description = "IDs of the existing public subnets"
+  type        = list(string)
+}
+
+variable "private_subnet_ids" {
+  description = "IDs of the existing private subnets"
+  type        = list(string)
+}
 
 ########################################################################################################################
 # ecs - start
@@ -141,17 +157,17 @@ variable "app_container_name" {
   description = "The name of the n8n app container."
   type        = string
 }
-variable "container_port" {
-  description = "The port of the n8n app."
-  type        = number
-}
 # container name - end
 # Service name - start
 variable "ecs_service_name" {
   description = "The name of the ECS service."
   type        = string
 }
-# Service name - end
+variable "ecs_cluster_name" {
+  description = "name of the ecs cluster"
+  type        = string
+
+}
 
 ########################################################################################################################
 # ecr 
@@ -161,54 +177,10 @@ variable "ecr_repo_name" {
   type        = string
 }
 
-######################################################################################################################## 
-# vpc 
 ########################################################################################################################
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
+# efs
+########################################################################################################################
+variable "efs_name" {
+  description = "The name of the EFS"
   type        = string
-  default     = "10.0.0.0/16"
 }
-
-variable "zuru_vpc_cidr" {
-  description = "zuru vpc cidr block"
-  default     = "-1"
-}
-variable "ecr_repo_name" {
-  description = "The name of the ECR repository."
-  default     = "zuru_ecr_repo"
-}
-
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  type        = string
-  default     = "10.0.0.0/16"
-}
-
-variable "public_subnet_cidrs" {
-  description = "CIDR blocks for public subnets"
-  type        = list(string)
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
-}
-
-variable "private_subnet_cidrs" {
-  description = "CIDR blocks for private subnets"
-  type        = list(string)
-  default     = ["10.0.3.0/24", "10.0.4.0/24"]
-}
-
-variable "go_api_image_name" {
-  description = "api image name"
-}
-
-variable "nginx_proxy_image_name" {
-  description = "nginx proxy image name"
-}
-
-variable "ecs_cluster_name" {
-  description = "name of the ecs cluster"
-  type        = string
-
-}
-
-

@@ -12,3 +12,9 @@ variable "common_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "project_name" {
+  description = "Project name"
+  type        = string
+}
+
