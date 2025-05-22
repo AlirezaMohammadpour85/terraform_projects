@@ -82,7 +82,7 @@ variable "private_subnet_cidrs" {
 variable "availability_zones" {
   description = "List of availability zones"
   type        = list(string)
-  default     = ["eu-north-1a", "eu-north-1a"] # Adjust for your region
+  default     = ["eu-north-1a", "eu-north-1b"] # Adjust for your region
 }
 
 ########################################################################################################################
