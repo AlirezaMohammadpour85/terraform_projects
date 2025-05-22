@@ -1,7 +1,7 @@
-resource "aws_security_group" "OT367_sg_allow_ssm" {
-  vpc_id = var.OT367_vpc_id
+resource "aws_security_group" "sg_allow_ssm" {
+  vpc_id = var.vpc_id
   tags = merge(var.common_tags, {
-    Name = "OT-367-sg-allow-ssm"
+    Name = "${var.environment}-${var.project_name}-sg-allow-ssm"
   })
   # Allow all outbound traffic
   egress {
@@ -28,24 +28,29 @@ resource "aws_security_group" "OT367_sg_allow_ssm" {
     from_port       = 8000
     to_port         = 8000
     protocol        = "tcp"
-    security_groups = [aws_security_group.OT367_elb_sg.id]
+    security_groups = [aws_security_group.alb_sg.id]
   }
 }
 
 # LB Security Group
 # This security group is for the Load Balancer (ELB) to allow inbound HTTP traffic
-resource "aws_security_group" "OT367_elb_sg" {
-  name        = "OT367_elb_sg"
-  description = "Allow inbound HTTP"
-  vpc_id      = var.OT367_vpc_id
+resource "aws_security_group" "alb_sg" {
+  name        = "${var.environment}-${var.project_name}-elb-sg"
+  description = "Allow inbound HTTP traffic from anywhere"
+  vpc_id      = var.vpc_id
 
+  # ingress {
+  #   from_port   = 443
+  #   to_port     = 443
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"] # Accept HTTP from anywhere
+  # }
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Accept HTTP from anywhere
+    from_port       = var.container_port
+    to_port         = var.container_port
+    protocol        = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -55,6 +60,6 @@ resource "aws_security_group" "OT367_elb_sg" {
 
   tags = merge(var.common_tags, {
     # Add common tags to the security group
-    Name = "OT367_elb_sg"
+    Name = "${var.environment}-${var.project_name}-elb-sg"
   })
 }

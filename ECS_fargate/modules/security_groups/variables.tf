@@ -2,16 +2,24 @@ variable "common_tags" {
   description = "Common tags for all resources"
   type        = map(string)
 }
-variable "OT367_vpc_id" {
-  description = "OT-367 vpc id"
+variable "vpc_id" {
+  description = "VPC ID"
   type        = string
 }
 
-
-# Variables for existing peer connections
-variable "existing_peering_connection_ids" {
-  description = "IDs of existing VPC peering connections"
-  type        = list(string)
-  default     = []
+variable "environment" {
+  description = "Environment"
+  type        = string
 }
+
+variable "project_name" {
+  description = "Project name"
+  type        = string
+}
+
+variable "container_port" {
+  description = "Container port"
+  type        = number
+}
+
 

@@ -5,31 +5,26 @@ module "ecr" {
   environment   = var.environment
   project_name  = var.project_name
 }
-# module "security_groups" {
-#   source        = "./modules/security_groups"
-#   vpc_id        = var.vpc_id
-#   environment   = var.environment
-#   common_tags   = var.common_tags
-#   alb_sg_id     = var.existing_alb_sg_id
-#   container_port = var.container_port
-# }
+module "security_groups" {
+  source         = "./modules/security_groups"
+  vpc_id         = module.network.vpc_id
+  environment    = var.environment
+  common_tags    = var.common_tags
+  container_port = var.container_port
+  project_name   = var.project_name
+}
 
-# module "network" {
-#   source = "./modules/network"
-#   OT367_vpc_cidr_block = var.OT367_vpc_cidr_block
-#   OT367_public_subnet_cidrs = var.OT367_public_subnet_cidrs
-#   OT367_private_subnet_availability_zone = var.OT367_private_subnet_availability_zone
-#   OT367_alb_zone_id = var.OT367_alb_zone_id
-#   OT367_elb_sg = var.OT367_elb_sg
-#   common_tags = var.common_tags
-#   environment = var.environment
-#   aws_region = var.aws_region
-#   acm_certificate_arn = var.acm_certificate_arn
-#   OT367_ec2_instance_info = var.OT367_ec2_instance_info
-#   OT367_private_subnet_cidrs = var.OT367_private_subnet_cidrs
-#   project_name = var.project_name
-
-# }
+module "network" {
+  source               = "./modules/network"
+  vpc_cidr_block       = var.vpc_cidr_block
+  public_subnet_cidrs  = var.public_subnet_cidrs
+  private_subnet_cidrs = var.private_subnet_cidrs
+  common_tags          = var.common_tags
+  environment          = var.environment
+  aws_region           = var.aws_region
+  project_name         = var.project_name
+  alb_sg               = module.security_groups.alb_sg
+}
 
 # module "efs" {
 #   source = "./modules/efs"

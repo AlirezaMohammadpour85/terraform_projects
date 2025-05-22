@@ -19,60 +19,26 @@ variable "aws_region" {
   type        = string
 }
 
+variable "vpc_cidr_block" {
+  description = "The CIDR block of the existing VPC"
+  type        = string
+}
 
-
-variable "OT367_public_subnet_cidrs" {
+variable "public_subnet_cidrs" {
   description = "OT-367 public subnet cidr"
   type        = list(string)
 
 }
 
-variable "OT367_private_subnet_availability_zone" {
-  description = "OT-367 private subnet availability zone"
-  type        = string
-}
-
-variable "OT367_private_subnet_cidrs" {
+variable "private_subnet_cidrs" {
   description = "OT-367 private subnet cidr"
   type        = list(string)
 }
-variable "OT367_vpc_cidr_block" {
-  description = "OT-367 vpc cidr block"
-  type        = string
 
-}
-variable "OT367_ec2_instance_info" {
-  description = "OT-367 ec2 instance availability zone"
+variable "alb_sg" {
+  description = "ALB security group ID"
   type        = object({
-    id                = string
-    public_ip         = string
-    availability_zone = string
+    id = string
   })
-}
-variable "OT367_elb_sg" {
-  description = "OT-367 security group for allowing SSM access"
-  type = object({
-    id   = string
-    name = string
-  })
-}
+} 
 
-
-variable "OT367_alb_zone_id" {
-  description = "OT-367 alb Zone id"
-  type        = string
-}
-
-
-# Variables for existing peer connections
-variable "existing_peering_connection_ids" {
-  description = "IDs of existing VPC peering connections"
-  type        = list(string)
-  default     = []
-}
-
-variable "peer_vpc_cidr_blocks" {
-  description = "CIDR blocks of the peer VPCs"
-  type        = list(string)
-  default     = []
-}

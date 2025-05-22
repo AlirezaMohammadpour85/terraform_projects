@@ -69,15 +69,17 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
-variable "public_subnet_ids" {
-  description = "IDs of the existing public subnets"
+variable "public_subnet_cidrs" {
+  description = "The CIDRs of the existing public subnets"
   type        = list(string)
 }
 
-variable "private_subnet_ids" {
-  description = "IDs of the existing private subnets"
+variable "private_subnet_cidrs" {
+  description = "The CIDRs of the existing private subnets"
   type        = list(string)
 }
+
+
 
 ########################################################################################################################
 # ecs - start

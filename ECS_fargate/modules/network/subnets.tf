@@ -1,28 +1,19 @@
-resource "aws_subnet" "OT367_public_subnet_1" {
-  vpc_id     = aws_vpc.OT367_vpc.id
-  cidr_block = var.OT367_public_subnet_cidrs[0]
+resource "aws_subnet" "public_subnet" {
+  count      = length(var.public_subnet_cidrs)
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.public_subnet_cidrs[count.index]
 
   tags = merge(var.common_tags, {
-    Name = "OT-367-public_subnet_1"
-    }
-  )
-}
-resource "aws_subnet" "OT367_public_subnet_2" {
-  vpc_id     = aws_vpc.OT367_vpc.id
-  cidr_block = var.OT367_public_subnet_cidrs[1]
-
-  tags = merge(var.common_tags, {
-    Name = "OT-367-public_subnet_2"
-    }
-  )
+    Name = "${var.environment}-${var.project_name}-public_subnet_${count.index + 1}"
+  })
 }
 
+resource "aws_subnet" "private_subnet" {
+  count      = length(var.private_subnet_cidrs)
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.private_subnet_cidrs[count.index]
 
-resource "aws_subnet" "OT367_private_subnet" {
-  vpc_id            = aws_vpc.OT367_vpc.id
-  cidr_block        = var.OT367_private_subnet_cidrs[0]
-  availability_zone = var.OT367_private_subnet_availability_zone
   tags = merge(var.common_tags, {
-    Name = "OT-367-private_subnet"
+    Name = "${var.environment}-${var.project_name}-private_subnet_${count.index + 1}"
   })
 }
