@@ -24,6 +24,7 @@ module "network" {
   aws_region           = var.aws_region
   project_name         = var.project_name
   alb_sg               = module.security_groups.alb_sg
+  availability_zones   = var.availability_zones
 }
 
 # module "efs" {
