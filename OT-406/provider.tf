@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "security-compliance-tfstate"
-    key            = "OT-406/terraform/terraform.tfstate"
+    key            = "OT-367/OT-406/terraform/terraform.tfstate"
     region         = "eu-west-2"
     profile        = "Domotz"
     encrypt        = true
