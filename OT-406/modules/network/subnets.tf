@@ -1,0 +1,46 @@
+########################################################################################################################
+## Data source for availability zones
+########################################################################################################################
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+########################################################################################################################
+## Public Subnets
+########################################################################################################################
+resource "aws_subnet" "publics" {
+  count = length(var.public_subnet_cidrs)
+  
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnet_cidrs[count.index]
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.common_tags["project"]}-public-subnet-${count.index + 1}"
+      Type = "Public"
+      Tier = "Public"
+    }
+  )
+}
+
+########################################################################################################################
+## Private Subnet
+########################################################################################################################
+resource "aws_subnet" "privates" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.private_subnet_cidrs[0]
+  availability_zone       = var.private_subnet_availability_zone
+  map_public_ip_on_launch = false
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.common_tags["project"]}-private-subnet"
+      Type = "Private"
+      Tier = "Private"
+    }
+  )
+}
