@@ -46,11 +46,3 @@ variable "sg_allow_ssm" {
     name = string
   })
 }
-
-variable "elb_sg" {
-  description = "Security group for the load balancer (passed but not directly used)"
-  type = object({
-    id   = string
-    name = string
-  })
-}

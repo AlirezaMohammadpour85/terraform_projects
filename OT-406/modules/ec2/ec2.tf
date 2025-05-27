@@ -3,7 +3,7 @@
 ########################################################################################################################
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"]  # Canonical's official AWS account ID
+  owners      = ["099720109477"] # Canonical's official AWS account ID
 
   filter {
     name   = "name"
@@ -47,8 +47,8 @@ resource "aws_instance" "main" {
     volume_size           = 80
     volume_type           = "gp3"
     delete_on_termination = false
-    encrypted             = true  # Added encryption
-    
+    encrypted             = true # Added encryption
+
     tags = merge(
       var.common_tags,
       {
@@ -79,3 +79,4 @@ usermod -aG docker ubuntu
 sudo usermod -aG docker ssm-user
 EOF
 
+}

@@ -25,20 +25,7 @@ output "sg_allow_ssm" {
   }
 }
 
-output "elb_sg" {
-  description = "Security group for the Application Load Balancer"
-  value = {
-    id   = aws_security_group.elb_sg.id
-    name = aws_security_group.elb_sg.name
-  }
-}
-
 output "sg_allow_ssm_id" {
   description = "ID of the SSM security group"
   value       = aws_security_group.sg_allow_ssm.id
-}
-
-output "elb_sg_id" {
-  description = "ID of the ELB security group"
-  value       = aws_security_group.elb_sg.id
 }

@@ -15,11 +15,6 @@ module "network" {
   
   # Dependencies from other modules
   ec2_instance_info = module.ec2.ec2_instance_info
-  elb_sg            = module.securitygroup.elb_sg
-  
-  # ALB configuration
-  alb_zone_id         = var.alb_zone_id
-  acm_certificate_arn = var.acm_certificate_arn
 }
 
 ########################################################################################################################
@@ -55,5 +50,4 @@ module "ec2" {
   public_subnet_1_id   = module.network.public_subnet_1_id
   private_subnet_id    = module.network.private_subnet_id
   sg_allow_ssm         = module.securitygroup.sg_allow_ssm
-  elb_sg               = module.securitygroup.elb_sg
 }

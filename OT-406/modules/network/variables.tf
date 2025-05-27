@@ -24,7 +24,7 @@ variable "public_subnet_cidrs" {
   
   validation {
     condition     = length(var.public_subnet_cidrs) >= 2
-    error_message = "At least 2 public subnets are required for ALB."
+    error_message = "At least 2 public subnets are required for NAT Gateway availability."
   }
 }
 
@@ -44,26 +44,6 @@ variable "private_subnet_availability_zone" {
 }
 
 ########################################################################################################################
-## ALB Configuration
-########################################################################################################################
-variable "acm_certificate_arn" {
-  description = "ARN of the ACM certificate for HTTPS"
-  type        = string
-}
-
-variable "alb_zone_id" {
-  description = "Route53 hosted zone ID for ALB DNS record"
-  type        = string
-}
-
-variable "elb_sg" {
-  description = "Security group for the load balancer"
-  type = object({
-    id   = string
-    name = string
-  })
-}
-########################################################################################################################
 ## Module Dependencies
 ########################################################################################################################
 variable "ec2_instance_info" {
@@ -75,4 +55,3 @@ variable "ec2_instance_info" {
     availability_zone = string
   })
 }
-

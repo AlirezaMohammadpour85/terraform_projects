@@ -66,23 +66,10 @@ variable "ec2_instance_type" {
 }
 
 ########################################################################################################################
-## elb
-########################################################################################################################
-variable "alb_zone_id" {
-  description = "ALB Zone id"
-  type        = string
-}
-
-variable "acm_certificate_arn" {
-  description = "The ARN of the existing ACM certificate"
-  type        = string
-}
-
-
-########################################################################################################################
 ## s3
 ########################################################################################################################
 variable "s3_bucket_name" {
   description = "Name of the S3 bucket for EC2 instance access"
   type        = string
+  default     = "ubuntu-core-secrets"
 }
