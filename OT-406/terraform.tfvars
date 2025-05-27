@@ -12,19 +12,19 @@ project_name = "OT-406"
 common_tags = {
   test       = "true"
   jira_issue = "OT-406"
-  project    = "Airbyte"
-  owner      = "Michael Beconcini"
+  project    = "NEC"
+  owner      = "Iacopo Papalini"
   terraform  = "true"
 }
 
 ########################################################################################################################
 ## Network Configuration
 ########################################################################################################################
-vpc_cidr_block = "10.250.0.0/16"
+vpc_cidr_block = "10.251.0.0/16"
 
 # Subnet CIDR Blocks
-public_subnet_cidrs  = ["10.250.1.0/24", "10.250.2.0/24"]
-private_subnet_cidrs = ["10.250.10.0/24"]
+public_subnet_cidrs  = ["10.251.11.0/24", "10.251.12.0/24"]
+private_subnet_cidrs = ["10.251.20.0/24"]
 
 # Private Subnet Availability Zone
 private_subnet_availability_zone = "eu-west-2a"
