@@ -2,8 +2,8 @@
 ## IAM Role for SSM Access
 ########################################################################################################################
 resource "aws_iam_role" "ssm_role" {
-  name = "${var.common_tags["project"]}-ssm-role"
-  
+  name = "${var.project_name}-${var.common_tags["project"]}-ssm-role"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -20,7 +20,7 @@ resource "aws_iam_role" "ssm_role" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-ssm-role"
+      Name = "${var.project_name}-${var.common_tags["project"]}-ssm-role"
     }
   )
 }
@@ -39,11 +39,11 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attach" {
 resource "aws_iam_instance_profile" "ssm_instance_profile" {
   name = "${var.project_name}-${var.common_tags["project"]}-ec2-ssm-profile"
   role = aws_iam_role.ssm_role.name
-  
+
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-ec2-ssm-profile"
+      Name = "${var.project_name}-${var.common_tags["project"]}-ec2-ssm-profile"
     }
   )
 }
