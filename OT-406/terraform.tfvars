@@ -35,8 +35,8 @@ existing_vpc_id = "vpc-0f7f6a2b57d4959dc"  # Using existing VPC from OT-367
 ## Subnet Configuration
 ########################################################################################################################
 # Subnet CIDR Blocks - Make sure these don't conflict with existing subnets if using existing VPC
-public_subnet_cidrs  = ["10.251.11.0/24", "10.251.12.0/24"]
-private_subnet_cidrs = ["10.251.20.0/24"]
+public_subnet_cidrs  = ["10.250.11.0/24", "10.250.12.0/24"]
+private_subnet_cidrs = ["10.250.20.0/24"]
 
 # Private Subnet Availability Zone
 private_subnet_availability_zone = "eu-west-2a"

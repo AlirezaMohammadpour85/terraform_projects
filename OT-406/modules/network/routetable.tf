@@ -9,7 +9,7 @@ resource "aws_route_table" "public" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-public-rt"
+      Name = "${var.project_name}-${var.common_tags["project"]}-public-rt"
       Type = "Public"
     }
   )
@@ -48,7 +48,7 @@ resource "aws_route_table" "private" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-private-rt"
+      Name = "${var.project_name}-${var.common_tags["project"]}-private-rt"
       Type = "Private"
     }
   )

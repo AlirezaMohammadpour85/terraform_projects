@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attach" {
 ## Instance Profile for EC2
 ########################################################################################################################
 resource "aws_iam_instance_profile" "ssm_instance_profile" {
-  name = "${var.common_tags["project"]}-ec2-ssm-profile"
+  name = "${var.project_name}-${var.common_tags["project"]}-ec2-ssm-profile"
   role = aws_iam_role.ssm_role.name
   
   tags = merge(
@@ -52,7 +52,7 @@ resource "aws_iam_instance_profile" "ssm_instance_profile" {
 ## S3 Access Policy for ubuntu-core-secrets bucket
 ########################################################################################################################
 resource "aws_iam_role_policy" "s3_access" {
-  name = "${var.common_tags["project"]}-s3-${var.s3_bucket_name}-policy"
+  name = "${var.project_name}-${var.common_tags["project"]}-s3-${var.s3_bucket_name}-policy"
   role = aws_iam_role.ssm_role.id
 
   policy = jsonencode({

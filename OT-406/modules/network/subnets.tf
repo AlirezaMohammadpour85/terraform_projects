@@ -20,7 +20,7 @@ resource "aws_subnet" "public" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-public-subnet-${count.index + 1}"
+      Name = "${var.project_name}-${var.common_tags["project"]}-public-subnet-${count.index + 1}"
       Type = "Public"
       Tier = "Public"
     }
@@ -40,7 +40,7 @@ resource "aws_subnet" "private" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-private-subnet"
+      Name = "${var.project_name}-${var.common_tags["project"]}-private-subnet"
       Type = "Private"
       Tier = "Private"
     }

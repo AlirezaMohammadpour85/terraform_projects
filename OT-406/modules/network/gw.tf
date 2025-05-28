@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "main" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-igw"
+      Name = "${var.project_name}-${var.common_tags["project"]}-igw"
     }
   )
 }
@@ -43,7 +43,7 @@ resource "aws_eip" "nat" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-nat-eip"
+      Name = "${var.project_name}-${var.common_tags["project"]}-nat-eip"
     }
   )
   
@@ -66,7 +66,7 @@ resource "aws_nat_gateway" "main" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.common_tags["project"]}-nat-gateway"
+      Name = "${var.project_name}-${var.common_tags["project"]}-nat-gateway"
     }
   )
 

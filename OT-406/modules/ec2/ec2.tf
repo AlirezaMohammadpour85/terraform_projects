@@ -52,7 +52,7 @@ resource "aws_instance" "main" {
     tags = merge(
       var.common_tags,
       {
-        Name = "${var.common_tags["project"]}-root-volume"
+        Name = "${var.project_name}-${var.common_tags["project"]}-root-volume"
       }
     )
   }
