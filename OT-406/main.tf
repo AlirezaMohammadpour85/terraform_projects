@@ -12,9 +12,10 @@ module "network" {
   public_subnet_cidrs              = var.public_subnet_cidrs
   private_subnet_cidrs             = var.private_subnet_cidrs
   private_subnet_availability_zone = var.private_subnet_availability_zone
-  
-  # Dependencies from other modules
-  ec2_instance_info = module.ec2.ec2_instance_info
+  existing_vpc_id                  = var.existing_vpc_id
+
+  # REMOVED: ec2_instance_info - This was causing circular dependency
+  # The network module should not depend on the EC2 module it provides infrastructure for
 }
 
 ########################################################################################################################

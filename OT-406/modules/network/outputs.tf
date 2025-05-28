@@ -3,12 +3,12 @@
 ########################################################################################################################
 output "vpc_id" {
   description = "The ID of the VPC"
-  value       = aws_vpc.main.id
+  value       = local.vpc_id
 }
 
 output "vpc_cidr_block" {
   description = "The CIDR block of the VPC"
-  value       = aws_vpc.main.cidr_block
+  value       = local.vpc_cidr_block
 }
 
 ########################################################################################################################
@@ -26,7 +26,7 @@ output "public_subnet_1_id" {
 
 output "public_subnet_2_id" {
   description = "Public Subnet 2 ID"
-  value       = aws_subnet.public[1].id
+  value       = length(aws_subnet.public) > 1 ? aws_subnet.public[1].id : ""
 }
 
 output "private_subnet_id" {
@@ -50,4 +50,17 @@ output "private_rt_id" {
 output "public_rt_id" {
   description = "Public route table ID"
   value       = aws_route_table.public.id
+}
+
+########################################################################################################################
+## Gateway Outputs (Optional - useful for other modules)
+########################################################################################################################
+output "nat_gateway_id" {
+  description = "NAT Gateway ID"
+  value       = aws_nat_gateway.main.id
+}
+
+output "internet_gateway_id" {
+  description = "Internet Gateway ID"
+  value       = local.igw_id
 }

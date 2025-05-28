@@ -18,11 +18,23 @@ common_tags = {
 }
 
 ########################################################################################################################
-## Network Configuration
+## Network Configuration - CHOOSE ONE OPTION
 ########################################################################################################################
-vpc_cidr_block = "10.251.0.0/16"
 
-# Subnet CIDR Blocks
+# OPTION 1: Create a NEW VPC
+# Uncomment these lines if you want to create a new VPC
+# vpc_cidr_block = "10.251.0.0/16"
+# existing_vpc_id = ""  # Empty string means "create new VPC"
+
+# OPTION 2: Use an EXISTING VPC
+# Using existing VPC from OT-367
+vpc_cidr_block = ""  # Not needed when using existing VPC
+existing_vpc_id = "vpc-0f7f6a2b57d4959dc"  # Using existing VPC from OT-367
+
+########################################################################################################################
+## Subnet Configuration
+########################################################################################################################
+# Subnet CIDR Blocks - Make sure these don't conflict with existing subnets if using existing VPC
 public_subnet_cidrs  = ["10.251.11.0/24", "10.251.12.0/24"]
 private_subnet_cidrs = ["10.251.20.0/24"]
 
