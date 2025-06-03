@@ -1,0 +1,55 @@
+AWS offers three types of load balancers:
+Application Load Balancer (ALB)
+Best suited for load balancing of HTTP and HTTPS traffic. Operates at
+the application layer (Layer 7) of the Open Systems Interconnection
+(OSI) model.
+Network Load Balancer (NLB)
+Best suited for load balancing of TCP, UDP, and TLS traffic. Can scale
+up and down in response to load faster than the ALB (the NLB is
+designed to scale to tens of millions of requests per second). Operates at
+the transport layer (Layer 4) of the OSI model.
+Classic Load Balancer (CLB)
+This is the “legacy” load balancer that predates both the ALB and NLB.
+It can handle HTTP, HTTPS, TCP, and TLS traffic but with far fewer
+features than either the ALB or NLB. Operates at both the application
+layer (L7) and transport layer (L4) of the OSI model.
+
+###########################################################
+
+
+The ALB consists of several parts, as shown in Figure 2-11:
+Listener
+Listens on a specific port (e.g., 80) and protocol (e.g., HTTP).
+Listener rule
+Takes requests that come into a listener and sends those that match
+specific paths (e.g., /foo and /bar) or hostnames (e.g.,
+foo.example.com and bar.example.com) to specific target
+groups.
+Target groups
+
+One or more servers that receive requests from the load balancer. The
+target group also performs health checks on these servers and sends
+requests only to healthy nodes.
+
+
+#######################################################################
+1- The first step is to create the ALB itself using the aws_lb resource
+2- The next step is to define a listener for this ALB using the - 
+    By default, AWS creates an ALLOW ALL egress rule when creating a new Security Group inside of a VPC.
+    - You’ll need to tell the aws_lb resource to use this security group via the
+        security_groups argument
+3- Next, you need to create a target group for your ASG using the
+    This target group will health check your Instances by periodically sending
+    an HTTP request to each Instance and will consider the Instance “healthy”
+    only if the Instance returns a response that matches the configured
+
+4- How does the target group know which EC2 Instances to send requests to?
+    You could attach a static list of EC2 Instances to the target group using the
+    aws_lb_target_group_attachment resource, but with an ASG,
+    Instances can launch or terminate at any time, so a static list won’t work.
+    Instead, you can take advantage of the first-class integration between the
+    ASG and the ALB. Go back to the aws autoscaling_group resource,
+    and set its target_group_arns argument to point at your new target group
+
+5- Finally, it’s time to tie all these pieces together by creating listener rules
+using the aws_lb_listener_rule resource
