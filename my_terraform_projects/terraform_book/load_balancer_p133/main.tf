@@ -72,19 +72,19 @@ data "aws_ami" "ubuntu" {
 ####################################################################################################
 # extract default vpc info from aws
 
-data "aws_vpc" "default_vpc" {
-  default = true
-}
+# data "aws_vpc" "default_vpc" {
+#   default = true
+# }
 
-data "aws_subnets" "default_subnets" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default_vpc.id]
-  }
-}
-output "subnet_ids" {
-  value = data.aws_subnets.default_subnets.ids
-}
+# data "aws_subnets" "default_subnets" {
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.default_vpc.id]
+#   }
+# }
+# output "subnet_ids" {
+#   value = data.aws_subnets.default_subnets.ids
+# }
 ###################################################################################################
 # ASG
 ####################################################################################################  
